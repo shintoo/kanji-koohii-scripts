@@ -16,9 +16,13 @@
 
     function initialize() {
         console.log("initializing")
-
-        const flipButton = document.getElementById("uiFcButtons0").getElementsByTagName("a")[0]
-        flipButton.addEventListener("click", addHandwriting, false)
+        const font = new FontFace("StrokeOrderKanji", "url(https://cdn.jsdelivr.net/gh/shintoo/kanji-koohii-scripts@main/stroke-order/KanjiStrokeOrders_v4.004.ttf)")
+        
+        font.load().then((font) => {
+          document.fonts.add(loaded_face)
+          const flipButton = document.getElementById("uiFcButtons0").getElementsByTagName("a")[0]
+          flipButton.addEventListener("click", addHandwriting, false)
+        })
     }
 
     async function addHandwriting() {
@@ -28,7 +32,7 @@
         const kanji = kanjiSpan.innerText
         console.log("kanji: " + kanji)
         const hwKanji = document.createElement("span")
-        hwKanji.style.fontFamily = "KanjiStrokeOrders"
+        hwKanji.style.fontFamily = "StrokeOrderKanji"
         hwKanji.innerText = kanji
 
         kanjiSpan.style.fontSize = "0.75em"
